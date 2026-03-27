@@ -41,6 +41,10 @@ public class NHSJobsSearchPage {
     @FindBy(id = "payRange")
     private WebElement payRangeDropdown;
 
+    //sort dropdown
+    @FindBy(name = "sort")
+    private WebElement sortDropdown;
+
     // Search button
     @FindBy(id = "search")
     private WebElement searchButton;
@@ -158,6 +162,16 @@ public class NHSJobsSearchPage {
 
     public boolean isJobReferenceDisplayed() {
         return jobReferenceField.isDisplayed();
+    }
+
+    public void selectSortDropdown(String sort) {
+        log.info("Selecting sort: {}", sort);
+        new Select(sortDropdown).selectByVisibleText(sort);
+    }
+
+
+    public WebElement getSortDropdownElement() {
+        return sortDropdown;
     }
 }
 

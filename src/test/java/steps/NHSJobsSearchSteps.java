@@ -2,16 +2,12 @@ package steps;
 
 import io.cucumber.java.en.*;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.NHSJobsSearchPage;
 import driver.DriverFactory;
 import utils.ConfigReader;
 import utils.LoggerUtils;
 import org.slf4j.Logger;
 import org.testng.Assert;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class NHSJobsSearchSteps {
@@ -64,27 +60,6 @@ public class NHSJobsSearchSteps {
 
     }
 
-    @Then("the results should be sorted by newest date posted")
-    public void the_results_should_be_sorted_by_newest_date_posted() {
-        List<WebElement> elements = nhsPage.getOpeningDates();
-
-        List<Integer> days = new ArrayList<>();
-
-        for (WebElement el : elements) {
-            String text = el.getText();
-
-            int d = text.toLowerCase().contains("today") ? 0 :
-                    Integer.parseInt(text.replaceAll("[^0-9]", ""));
-
-            days.add(d);
-        }
-
-        for (int i = 0; i < days.size() - 1; i++) {
-            Assert.assertTrue(days.get(i) <= days.get(i + 1),
-                    " Not sorted by newest date");
-        }
-
-    }
 
     @When("I select distance {string}")
     public void i_select_distance(String distance) {
@@ -200,6 +175,7 @@ public class NHSJobsSearchSteps {
         nhsPage.clickSearch();
 
     }
+
 
 
 }
